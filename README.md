@@ -1,27 +1,29 @@
-# Execard-Selfbot
-The best free discord selfbot.
-________________________________________
+# THIS PROJECT HAS BEEN DISCONTINUED. ANY FURTHER ISSUES WON'T BE ANSWERED BY US!  ASK JEANCYS!!
 
-Made from Alucard, which used to be a paid Selfbot, and Pxrnhub Selfbot, which was skidded from Exeter Selfbot, and Lucifer Selfbot, which is another Premium Paid Selfbot.
+# Setup
+  - Since it's discontinuted and some good guy (trickstr) decided to make a video tutorial about it
+  - There are the steps: https://www.youtube.com/watch?v=Sqwdlvr5xvo
 
-Execard is free for all to use.
+# Legality
 
-_______________________________________
+Everything you can see here has been made for educational purposes and proof of concepts. I do not promote the usage of my tools, I do not take responsability on the bad usage of this tool.
 
-So how do I use Execard?? First go to https://www.python.org/downloads/release/python-390/ and scroll all the way down to find the one suited for your OS.
-Then go to the ZIP file and Extract it using Winrar. Then go and run Install.bat in the file you Extracted. Then run Main.py, and it should launch with something like this:
+Love you coats -Vexy
 
-https://zykx.is-inside.me/qriy6qMm.png
-_______________________________________
 
-Is this safe? 
 
-Nope.
 
-Can I get banned from discord for using this?
 
-Yup.
+[![Run on Repl.it](https://repl.it/badge/github/Alucard-Selfbot/Alucard-Selfbot-src)](https://repl.it/github/Alucard-Selfbot/Alucard-Selfbot-src)
 
-Do I reccommend you use it?
+##### thanks for the yt vid ~ Fweak
 
-Nope.
+# Q&A
+- Q: **`SSL Certificate Error`**
+- A: Just install [CRT File](https://crt.sh/?id=2835394). Then run it and install. (This is common and it was a certificate that expired May 30th 2020. But a new one came out so install it.). If you wanna go into further detail then head to [SITE](https://support.sectigo.com/Com_KnowledgeDetailPage?Id=kA03l00000117LT).  
+- Q: **`Module Missing`**
+- A: Just run `pip install -r requirements.txt` in console. This insures that all modules required for Alucard are installed and up to date!
+- Q: **`Windll not found`**
+- A: Alucard uses some windows features from modules. Example windll from ctypes. windll is used to add the console title. You can remove the title setters in-order to fix it.
+- Q: **`TypeError: __new__() got an unexpected keyword argument 'deny_new'`**
+- A: This error occured on an old installation of discord.py to fix simply run :`pip install -U discord.py` this updates discord.py!
