@@ -2,7 +2,6 @@
 
 # Setup
 - Install [Python](https://www.python.org/downloads/release/python-390) with `Add Python to PATH` box
-<img src="http://ignacio.loves-femboys.fun/uploads/ignacio.loves-femboys.fun/uMb7Aw8CG2eo.png"/>
 
 - Download [Source](https://github.com/Jeancys/Execard-Selfbot/archive/main.zip) and extract
 
