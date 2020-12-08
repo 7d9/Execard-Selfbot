@@ -5,11 +5,13 @@
 
 - Download [Source](https://github.com/Jeancys/Execard-Selfbot/archive/main.zip) and extract
 
-- Go to the token area and paste your [token](https://github.com/Tyrrrz/DiscordChatExporter/wiki/Obtaining-Token-and-Channel-IDs#how-to-get-a-user-token)
+- Install modules with `installer.bat`
 
-- Go to the password area and type your password (OPTIONAL) 
+- Go to the `token` area and paste your [token](https://github.com/Tyrrrz/DiscordChatExporter/wiki/Obtaining-Token-and-Channel-IDs#how-to-get-a-user-token)
 
-- Run selfbot with launcher.bat or py Main.py
+- Go to the `password` area and type your password (OPTIONAL) 
+
+- Run selfbot with `launcher.bat`
 
 [![Run on Repl.it](https://repl.it/badge/github/Jeancys/Execard-Selfbot)](https://repl.it/github.com/Jeancys/Execard-Selfbot)
 
