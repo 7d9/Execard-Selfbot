@@ -3,9 +3,13 @@
 # Setup
 - Install [Python](https://www.python.org/downloads/release/python-390) with `Add Python to PATH` box
 <img src="http://ignacio.loves-femboys.fun/uploads/ignacio.loves-femboys.fun/uMb7Aw8CG2eo.png"/>
+
 - Download [Source](https://github.com/Jeancys/Execard-Selfbot/archive/main.zip) and extract
+
 - Go to the token area and paste your [token](https://github.com/Tyrrrz/DiscordChatExporter/wiki/Obtaining-Token-and-Channel-IDs#how-to-get-a-user-token)
+
 - Go to the password area and type your password (OPTIONAL) 
+
 - Run selfbot with launcher.bat or py Main.py
 
 [![Run on Repl.it](https://repl.it/badge/github/Jeancys/Execard-Selfbot)](https://repl.it/github.com/Jeancys/Execard-Selfbot)
