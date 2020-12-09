@@ -38,7 +38,6 @@ privnote_sniper = config.get('privnote_sniper')
 
 stream_url = config.get('stream_url')
 tts_language = config.get('tts_language')
-
 bitly_key = config.get('bitly_key')
 cat_key = config.get('cat_key')
 weather_key = config.get('weather_key')
@@ -134,7 +133,6 @@ def startprint():
     print(f'''{Fore.RESET}
                                 
 
-
                         {Fore.YELLOW}     ███████╗██╗░░██╗███████╗░█████╗░░█████╗░██████╗░██████╗░
                         {Fore.YELLOW}     ██╔════╝╚██╗██╔╝██╔════╝██╔══██╗██╔══██╗██╔══██╗██╔══██╗
                         {Fore.YELLOW}     █████╗░░░╚███╔╝░█████╗░░██║░░╚═╝███████║██████╔╝██║░░██║
@@ -143,9 +141,7 @@ def startprint():
                         {Fore.YELLOW}     ╚══════╝╚═╝░░╚═╝╚══════╝░╚════╝░╚═╝░░╚═╝╚═╝░░╚═╝╚═════╝░
                                                    
                                                    
-
-                
-                        
+                                        
                        {Fore.GREEN}Execard {SELFBOT.__version__} | {Fore.RED}Logged in as: {Fore.CYAN} {Alucard.user.name}#{Alucard.user.discriminator} {Fore.RED}| ID: {Fore.CYAN}{Alucard.user.id}   
                        {Fore.RED}Privnote Sniper | {Fore.CYAN}{privnote}
                        {Fore.RED}Nitro Sniper    | {Fore.CYAN}{nitro}
@@ -302,7 +298,7 @@ def RandString():
 colorama.init()
 Alucard = discord.Client()
 Alucard = commands.Bot(
-    description='Alucard Selfbot',
+    description='Execard Selfbot',
     command_prefix=prefix,
     self_bot=True
 )
@@ -425,7 +421,7 @@ async def on_message(message):
             return
             
     if 'Someone just dropped' in message.content:
-        if slotbot_sniper == True:
+        if slotbot_sniper == true:
             if message.author.id == 346353957029019648:
                 try:
                     await message.channel.send('~grab')
@@ -440,8 +436,8 @@ async def on_message(message):
             return
 
     if 'GIVEAWAY' in message.content:
-        if giveaway_sniper == True:
-            if message.author.id == 294882584201003009:
+        if giveaway_sniper == true:
+            if message.author.id == 294882584201003009 or message.author.id == 673918978178940951 or message.author.id == 582537632991543307 or message.author.id == 396464677032427530 or message.author.id == 649604306596528138:
                 try:    
                     await message.add_reaction("🎉")
                 except discord.errors.Forbidden:
@@ -456,7 +452,7 @@ async def on_message(message):
 
     if f'Congratulations <@{Alucard.user.id}>' in message.content:
         if giveaway_sniper == True:
-            if message.author.id == 294882584201003009:    
+            if message.author.id == 294882584201003009 or message.author.id == 673918978178940951 or message.author.id == 582537632991543307 or message.author.id == 396464677032427530 or message.author.id == 649604306596528138:    
                 print(""
                 f"\n{Fore.CYAN}[{time} - Giveaway Won]"+Fore.RESET)
                 GiveawayData()
@@ -506,7 +502,6 @@ async def on_connect():
     
     startprint()
     ctypes.windll.kernel32.SetConsoleTitleW(f'[Execard v{SELFBOT.__version__}] | Logged in as {Alucard.user.name} ')
-
 
 @Alucard.command(aliases=["automee6"])
 async def mee6(ctx, param=None):
@@ -600,6 +595,25 @@ async def mee6(ctx, param=None):
                      'Watching the geriatric men’s softball team brought back memories of 3 yr olds playing t-ball.']
         await Alucard.get_channel(Alucard.mee6_channel).send(random.choice(sentences), delete_after=0.1)
         await asyncio.sleep(45)
+
+@Alucard.command(aliases=['slotsniper', "slotbotsniper"])
+async def slotbot(ctx, param=None):
+    await ctx.message.delete()
+    Alucard.slotbot_sniper = False
+    if str(param).lower() == 'true' or str(param).lower() == 'on':
+        Alucard.slotbot_sniper = True
+    elif str(param).lower() == 'false' or str(param).lower() == 'off':
+        Alucard.slotbot_sniper = False
+
+
+@Alucard.command(aliases=['giveawaysniper'])
+async def giveaway(ctx, param=None):
+    await ctx.message.delete()
+    Alucard.giveaway_sniper = False
+    if str(param).lower() == 'true' or str(param).lower() == 'on':
+        Alucard.giveaway_sniper = True
+    elif str(param).lower() == 'false' or str(param).lower() == 'off':
+        Alucard.giveaway_sniper = False
 
 @Alucard.command()
 async def supreme(ctx, *, args=None):
