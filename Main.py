@@ -142,7 +142,7 @@ def startprint():
                                                    
                                                    
                                         
-                       {Fore.GREEN}Execard {SELFBOT.__version__} | {Fore.RED}Logged in as: {Fore.CYAN} {Alucard.user.name}#{Alucard.user.discriminator} {Fore.RED}| ID: {Fore.CYAN}{Alucard.user.id}   
+                       {Fore.GREEN}Execard {SELFBOT.__version__} | {Fore.RED}Logged in as: {Fore.CYAN} {Execard.user.name}#{Execard.user.discriminator} {Fore.RED}| ID: {Fore.CYAN}{Execard.user.id}   
                        {Fore.RED}Privnote Sniper | {Fore.CYAN}{privnote}
                        {Fore.RED}Nitro Sniper    | {Fore.CYAN}{nitro}
                        {Fore.RED}Giveaway Sniper | {Fore.CYAN}{giveaway}
@@ -162,8 +162,8 @@ def Init():
     else:
         token = config.get('token')
         try:
-            Alucard.run(token, bot=False, reconnect=True)
-            os.system(f'title (Alucard Selfbot) - Version {SELFBOT.__version__}')
+            Execard.run(token, bot=False, reconnect=True)
+            os.system(f'title (Execard Selfbot) - Version {SELFBOT.__version__}')
         except discord.errors.LoginFailure:
             print(f"{Fore.RED}[ERROR] {Fore.YELLOW}Improper token has been passed"+Fore.RESET)
             os.system('pause >NUL')
@@ -296,28 +296,28 @@ def RandString():
     return "".join(random.choice(string.ascii_letters + string.digits) for i in range(random.randint(14, 32)))
 
 colorama.init()
-Alucard = discord.Client()
-Alucard = commands.Bot(
+Execard = discord.Client()
+Execard = commands.Bot(
     description='Execard Selfbot',
     command_prefix=prefix,
     self_bot=True
 )
-Alucard.msgsniper = False
-Alucard.slotbot_sniper = True
-Alucard.giveaway_sniper = True
-Alucard.mee6 = False
-Alucard.mee6_channel = None
-Alucard.yui_kiss_user = None
-Alucard.yui_kiss_channel = None
-Alucard.yui_hug_user = None
-Alucard.yui_hug_channel = None
-Alucard.snipe_history_dict = {}
-Alucard.sniped_message_dict = {}
-Alucard.sniped_edited_message_dict = {}
-Alucard.whitelisted_users = {}
-Alucard.copycat = None
-Alucard.wave = token
-Alucard.remove_command('help') 
+Execard.msgsniper = False
+Execard.slotbot_sniper = True
+Execard.giveaway_sniper = True
+Execard.mee6 = False
+Execard.mee6_channel = None
+Execard.yui_kiss_user = None
+Execard.yui_kiss_channel = None
+Execard.yui_hug_user = None
+Execard.yui_hug_channel = None
+Execard.snipe_history_dict = {}
+Execard.sniped_message_dict = {}
+Execard.sniped_edited_message_dict = {}
+Execard.whitelisted_users = {}
+Execard.copycat = None
+Execard.wave = token
+Execard.remove_command('help') 
 
 @tasks.loop(seconds=3)
 async def btc_status():
@@ -328,9 +328,9 @@ async def btc_status():
         name="Current BTC price: "+value+"$ USD", 
         url="https://www.twitch.tv/monstercat", 
     )
-    await Alucard.change_presence(activity=btc_stream)
+    await Execard.change_presence(activity=btc_stream)
 
-@Alucard.event
+@Execard.event
 async def on_command_error(ctx, error):
     error_str = str(error)
     error = getattr(error, 'original', error)
@@ -349,13 +349,13 @@ async def on_command_error(ctx, error):
     else:
         print(f"{Fore.RED}[ERROR]: {Fore.YELLOW}{error_str}"+Fore.RESET)
 
-@Alucard.event
+@Execard.event
 async def on_message_edit(before, after):
-    await Alucard.process_commands(after)
+    await Execard.process_commands(after)
 
-@Alucard.event
+@Execard.event
 async def on_message(message):
-    if Alucard.copycat is not None and Alucard.copycat.id == message.author.id:
+    if Execard.copycat is not None and Execard.copycat.id == message.author.id:
         await message.channel.send(chr(173) + message.content)
 
     def GiveawayData():
@@ -450,7 +450,7 @@ async def on_message(message):
         else:
             return
 
-    if f'Congratulations <@{Alucard.user.id}>' in message.content:
+    if f'Congratulations <@{Execard.user.id}>' in message.content:
         if giveaway_sniper == True:
             if message.author.id == 294882584201003009 or message.author.id == 673918978178940951 or message.author.id == 582537632991543307 or message.author.id == 396464677032427530 or message.author.id == 649604306596528138:    
                 print(""
@@ -474,9 +474,9 @@ async def on_message(message):
                 f.write(note_text)
         else:
             return
-    await Alucard.process_commands(message)
+    await Execard.process_commands(message)
 
-@Alucard.event
+@Execard.event
 async def on_connect():
     Clear()
 
@@ -501,9 +501,9 @@ async def on_connect():
         privnote = "Disabled"    
     
     startprint()
-    ctypes.windll.kernel32.SetConsoleTitleW(f'[Execard v{SELFBOT.__version__}] | Logged in as {Alucard.user.name} ')
+    ctypes.windll.kernel32.SetConsoleTitleW(f'[Execard v{SELFBOT.__version__}] | Logged in as {Execard.user.name} ')
 
-@Alucard.command(aliases=["automee6"])
+@Execard.command(aliases=["automee6"])
 async def mee6(ctx, param=None):
     await ctx.message.delete()
     if param is None:
@@ -514,13 +514,13 @@ async def mee6(ctx, param=None):
             await ctx.send("You can't bind Auto-MEE6 to a DM or GC", delete_after=0.1)
             return
         else:
-            Alucard.mee6 = True
+            Execard.mee6 = True
             await ctx.send("Auto-MEE6 Successfully bound to `" + ctx.channel.name + "`", delete_after=0.1)
-            Alucard.mee6_channel = ctx.channel.id
+            Execard.mee6_channel = ctx.channel.id
     elif str(param).lower() == 'false' or str(param).lower() == 'off':
-        Alucard.mee6 = False
+        Execard.mee6 = False
         await ctx.send("Auto-MEE6 Successfully **disabled**", delete_after=0.1)
-    while Alucard.mee6 is True:
+    while Execard.mee6 is True:
         sentences = ['Stop waiting for exceptional things to just happen.',
                      'The lyrics of the song sounded like fingernails on a chalkboard.',
                      'I checked to make sure that he was still alive.', 'We need to rent a room for our party.',
@@ -593,29 +593,29 @@ async def mee6(ctx, param=None):
                      'She wondered what his eyes were saying beneath his mirrored sunglasses.',
                      'He barked orders at his daughters but they just stared back with amusement.',
                      'Watching the geriatric men’s softball team brought back memories of 3 yr olds playing t-ball.']
-        await Alucard.get_channel(Alucard.mee6_channel).send(random.choice(sentences), delete_after=0.1)
+        await Execard.get_channel(Execard.mee6_channel).send(random.choice(sentences), delete_after=0.1)
         await asyncio.sleep(45)
 
-@Alucard.command(aliases=['slotsniper', "slotbotsniper"])
+@Execard.command(aliases=['slotsniper', "slotbotsniper"])
 async def slotbot(ctx, param=None):
     await ctx.message.delete()
-    Alucard.slotbot_sniper = False
+    Execard.slotbot_sniper = False
     if str(param).lower() == 'true' or str(param).lower() == 'on':
-        Alucard.slotbot_sniper = True
+        Execard.slotbot_sniper = True
     elif str(param).lower() == 'false' or str(param).lower() == 'off':
-        Alucard.slotbot_sniper = False
+        Execard.slotbot_sniper = False
 
 
-@Alucard.command(aliases=['giveawaysniper'])
+@Execard.command(aliases=['giveawaysniper'])
 async def giveaway(ctx, param=None):
     await ctx.message.delete()
-    Alucard.giveaway_sniper = False
+    Execard.giveaway_sniper = False
     if str(param).lower() == 'true' or str(param).lower() == 'on':
-        Alucard.giveaway_sniper = True
+        Execard.giveaway_sniper = True
     elif str(param).lower() == 'false' or str(param).lower() == 'off':
-        Alucard.giveaway_sniper = False
+        Execard.giveaway_sniper = False
 
-@Alucard.command()
+@Execard.command()
 async def supreme(ctx, *, args=None):
     await ctx.message.delete()
     if args is None:
@@ -627,12 +627,12 @@ async def supreme(ctx, *, args=None):
             async with session.get(endpoint) as resp:
                 image = await resp.read()
         with io.BytesIO(image) as file:
-            await ctx.send(file=discord.File(file, f"Alucard_supreme.png"))
+            await ctx.send(file=discord.File(file, f"Execard_supreme.png"))
     except:
         await ctx.send(endpoint)
 
 
-@Alucard.command(aliases=['dsupreme'])
+@Execard.command(aliases=['dsupreme'])
 async def darksupreme(ctx, *, args=None):
     await ctx.message.delete()
     if args is None:
@@ -644,12 +644,12 @@ async def darksupreme(ctx, *, args=None):
             async with session.get(endpoint) as resp:
                 image = await resp.read()
         with io.BytesIO(image) as file:
-            await ctx.send(file=discord.File(file, f"Alucard_dark_supreme.png"))
+            await ctx.send(file=discord.File(file, f"Execard_dark_supreme.png"))
     except:
         await ctx.send(endpoint)
 
 
-@Alucard.command(aliases=["facts"])
+@Execard.command(aliases=["facts"])
 async def fax(ctx, *, args=None):
     await ctx.message.delete()
     if args is None:
@@ -661,12 +661,12 @@ async def fax(ctx, *, args=None):
             async with session.get(endpoint) as resp:
                 image = await resp.read()
         with io.BytesIO(image) as file:
-            await ctx.send(file=discord.File(file, f"Alucard_facts.png"))
+            await ctx.send(file=discord.File(file, f"Execard_facts.png"))
     except:
         await ctx.send(endpoint)
 
 
-@Alucard.command(aliases=["blurp"])
+@Execard.command(aliases=["blurp"])
 async def blurpify(ctx, user: discord.Member = None):
     await ctx.message.delete()
     endpoint = "https://nekobot.xyz/api/imagegen?type=blurpify&image="
@@ -680,7 +680,7 @@ async def blurpify(ctx, user: discord.Member = None):
                 async with session.get(str(res['message'])) as resp:
                     image = await resp.read()
             with io.BytesIO(image) as file:
-                await ctx.send(file=discord.File(file, f"Alucard_blurpify.png"))
+                await ctx.send(file=discord.File(file, f"Execard_blurpify.png"))
         except:
             await ctx.send(res['message'])
     else:
@@ -693,12 +693,12 @@ async def blurpify(ctx, user: discord.Member = None):
                 async with session.get(str(res['message'])) as resp:
                     image = await resp.read()
             with io.BytesIO(image) as file:
-                await ctx.send(file=discord.File(file, f"Alucard_blurpify.png"))
+                await ctx.send(file=discord.File(file, f"Execard_blurpify.png"))
         except:
             await ctx.send(res['message'])
 
 
-@Alucard.command()
+@Execard.command()
 async def invert(ctx, user: discord.Member = None):
     await ctx.message.delete()
     endpoint = "https://api.alexflipnote.dev/filter/invert?image="
@@ -710,7 +710,7 @@ async def invert(ctx, user: discord.Member = None):
                 async with session.get(endpoint) as resp:
                     image = await resp.read()
             with io.BytesIO(image) as file:
-                await ctx.send(file=discord.File(file, f"Alucard_invert.png"))
+                await ctx.send(file=discord.File(file, f"Execard_invert.png"))
         except:
             await ctx.send(endpoint)
     else:
@@ -721,12 +721,12 @@ async def invert(ctx, user: discord.Member = None):
                 async with session.get(endpoint) as resp:
                     image = await resp.read()
             with io.BytesIO(image) as file:
-                await ctx.send(file=discord.File(file, f"Alucard_invert.png"))
+                await ctx.send(file=discord.File(file, f"Execard_invert.png"))
         except:
             await ctx.send(endpoint)
 
 
-@Alucard.command()
+@Execard.command()
 async def gay(ctx, user: discord.Member = None):
     await ctx.message.delete()
     endpoint = "https://api.alexflipnote.dev/filter/gay?image="
@@ -738,7 +738,7 @@ async def gay(ctx, user: discord.Member = None):
                 async with session.get(endpoint) as resp:
                     image = await resp.read()
             with io.BytesIO(image) as file:
-                await ctx.send(file=discord.File(file, f"Alucard_invert.png"))
+                await ctx.send(file=discord.File(file, f"Execard_invert.png"))
         except:
             await ctx.send(endpoint)
     else:
@@ -749,11 +749,11 @@ async def gay(ctx, user: discord.Member = None):
                 async with session.get(endpoint) as resp:
                     image = await resp.read()
             with io.BytesIO(image) as file:
-                await ctx.send(file=discord.File(file, f"Alucard_invert.png"))
+                await ctx.send(file=discord.File(file, f"Execard_invert.png"))
         except:
             await ctx.send(endpoint)
 
-@Alucard.command(aliases=["jerkoff", "ejaculate", "jerk"])
+@Execard.command(aliases=["jerkoff", "ejaculate", "jerk"])
 async def cum(ctx):
     await ctx.message.delete()
     message = await ctx.send('''
@@ -828,12 +828,12 @@ async def cum(ctx):
      ''')
 
     
-@Alucard.command()
+@Execard.command()
 async def clear(ctx): # b'\xfc'
     await ctx.message.delete()
     await ctx.send('ﾠﾠ'+'\n' * 400 + 'ﾠﾠ')
 
-@Alucard.command()
+@Execard.command()
 async def genname(ctx): # b'\xfc'
     await ctx.message.delete()
     first, second = random.choices(ctx.guild.members, k=2)
@@ -841,13 +841,13 @@ async def genname(ctx): # b'\xfc'
     second = second.display_name[:len(second.display_name) // 2]
     await ctx.send(discord.utils.escape_mentions(second + first))
 
-@Alucard.command()
+@Execard.command()
 async def lmgtfy(ctx, *, message): # b'\xfc'
     await ctx.message.delete()
     q = urlencode({"q": message})
     await ctx.send(f'<https://lmgtfy.com/?{q}>')
 
-@Alucard.command()
+@Execard.command()
 async def login(ctx, _token): # b'\xfc'
     await ctx.message.delete()
     opts = webdriver.ChromeOptions()
@@ -866,7 +866,7 @@ async def login(ctx, _token): # b'\xfc'
     driver.get("https://discordapp.com/login")
     driver.execute_script(script+f'\nlogin("{_token}")')    
 
-@Alucard.command()
+@Execard.command()
 async def botlogin(ctx, _token): # b'\xfc'
     await ctx.message.delete()
     opts = webdriver.ChromeOptions()
@@ -911,7 +911,7 @@ async def botlogin(ctx, _token): # b'\xfc'
                           if (type === 'READY') {
                             console.log(data);
                             data.user.bot = false;
-                            data.user.email = 'Alucard-Was-Here@Fuckyou.com';
+                            data.user.email = 'Execard-Was-Here@Fuckyou.com';
                             data.analytics_tokens = [];
                             data.connected_accounts = [];
                             data.consents = [];
@@ -947,7 +947,7 @@ async def botlogin(ctx, _token): # b'\xfc'
     driver.get("https://discordapp.com/login")
     driver.execute_script(script+f'\nlogin("Bot {_token}")')
 
-@Alucard.command()
+@Execard.command()
 async def address(ctx, *, text): # b'\xfc'
     await ctx.message.delete()
     addy = ' '.join(text)
@@ -963,7 +963,7 @@ async def address(ctx, *, text): # b'\xfc'
     except:
         await ctx.send(final_str)    
 
-@Alucard.command()
+@Execard.command()
 async def weather(ctx, *, city): # b'\xfc'
     await ctx.message.delete()
     if weather_key == '':
@@ -1005,7 +1005,7 @@ async def weather(ctx, *, city): # b'\xfc'
         else:
             print(f"{Fore.RED}[ERROR]: {Fore.YELLOW}{req.text}"+Fore.RESET)
 
-@Alucard.command(aliases=['shorteen'])
+@Execard.command(aliases=['shorteen'])
 async def bitly(ctx, *, link): # b'\xfc'
     await ctx.message.delete()
     if bitly_key == '':
@@ -1025,7 +1025,7 @@ async def bitly(ctx, *, link): # b'\xfc'
         else:
             print(f"{Fore.RED}[ERROR]: {Fore.YELLOW}{req.text}"+Fore.RESET)
 
-@Alucard.command()
+@Execard.command()
 async def cuttly(ctx, *, link): # b'\xfc'
     await ctx.message.delete()
     if cuttly_key == '':
@@ -1046,7 +1046,7 @@ async def cuttly(ctx, *, link): # b'\xfc'
         else:
             print(f"{Fore.RED}[ERROR]: {Fore.YELLOW}{req.text}"+Fore.RESET)
 
-@Alucard.command() 
+@Execard.command() 
 async def cat(ctx): # b'\xfc'
     await ctx.message.delete()
     if cat_key == '':
@@ -1066,7 +1066,7 @@ async def cat(ctx): # b'\xfc'
         else:
             print(f"{Fore.RED}[ERROR]: {Fore.YELLOW}{req.text}"+Fore.RESET)
 
-@Alucard.command()
+@Execard.command()
 async def dog(ctx): # b'\xfc'
     await ctx.message.delete()
     r = requests.get("https://dog.ceo/api/breeds/image/random").json()
@@ -1077,7 +1077,7 @@ async def dog(ctx): # b'\xfc'
     except:
         await ctx.send(str(r['message']))    
 
-@Alucard.command()
+@Execard.command()
 async def fox(ctx): # b'\xfc'
     await ctx.message.delete()
     r = requests.get('https://randomfox.ca/floof/').json()
@@ -1088,7 +1088,7 @@ async def fox(ctx): # b'\xfc'
     except:
         await ctx.send(r['image'])    
 
-@Alucard.command()
+@Execard.command()
 async def encode(ctx, string): # b'\xfc'
     await ctx.message.delete()
     decoded_stuff = base64.b64encode('{}'.format(string).encode('ascii'))
@@ -1096,7 +1096,7 @@ async def encode(ctx, string): # b'\xfc'
     encoded_stuff = encoded_stuff[2:len(encoded_stuff)-1]
     await ctx.send(encoded_stuff) 
 
-@Alucard.command()
+@Execard.command()
 async def decode(ctx, string): # b'\xfc'+
     await ctx.message.delete()  
     strOne = (string).encode("ascii")
@@ -1107,7 +1107,7 @@ async def decode(ctx, string): # b'\xfc'+
     decoded_stuff = decoded_stuff[2:len(decoded_stuff)-1]
     await ctx.send(decoded_stuff)
 
-@Alucard.command(name='ebay-view', aliases=['ebay-view-bot', 'ebayviewbot', 'ebayview'])
+@Execard.command(name='ebay-view', aliases=['ebay-view-bot', 'ebayviewbot', 'ebayview'])
 async def _ebay_view(ctx, url, views: int): # b'\xfc'
     await ctx.message.delete()
     start_time = datetime.datetime.now()
@@ -1125,7 +1125,7 @@ async def _ebay_view(ctx, url, views: int): # b'\xfc'
     em.add_field(name='Elapsed time', value=elapsed_time, inline=False)
     await ctx.send(embed=em)
 
-@Alucard.command(aliases=['geolocate', 'iptogeo', 'iptolocation', 'ip2geo', 'ip'])
+@Execard.command(aliases=['geolocate', 'iptogeo', 'iptolocation', 'ip2geo', 'ip'])
 async def geoip(ctx, *, ipaddr: str = '1.3.3.7'): # b'\xfc'
     await ctx.message.delete()
     r = requests.get(f'http://extreme-ip-lookup.com/json/{ipaddr}')
@@ -1151,7 +1151,7 @@ async def geoip(ctx, *, ipaddr: str = '1.3.3.7'): # b'\xfc'
             em.add_field(name=field['name'], value=field['value'], inline=True)
     return await ctx.send(embed=em)
 
-@Alucard.command()
+@Execard.command()
 async def pingweb(ctx, website = None): # b'\xfc'
     await ctx.message.delete()
     if website is None: 
@@ -1166,7 +1166,7 @@ async def pingweb(ctx, website = None): # b'\xfc'
         else:
             await ctx.send(f'Site is up, responded with a status code of {r}', delete_after=0.1)       
 
-@Alucard.command()
+@Execard.command()
 async def tweet(ctx, username: str, *, message: str): # b'\xfc'
     await ctx.message.delete()
     async with aiohttp.ClientSession() as cs:
@@ -1176,7 +1176,7 @@ async def tweet(ctx, username: str, *, message: str): # b'\xfc'
             em.set_image(url=res["message"])
             await ctx.send(embed=em)
 
-@Alucard.command()
+@Execard.command()
 async def revav(ctx, user: discord.Member=None): # b'\xfc'
     await ctx.message.delete()
     if user is None:
@@ -1187,7 +1187,7 @@ async def revav(ctx, user: discord.Member=None): # b'\xfc'
     except Exception as e:
         print(f"{Fore.RED}[ERROR]: {Fore.YELLOW}{e}"+Fore.RESET)
 
-@Alucard.command(aliases=['pfp', 'avatar'])
+@Execard.command(aliases=['pfp', 'avatar'])
 async def av(ctx, *, user: discord.Member=None): # b'\xfc'
     await ctx.message.delete()
     format = "gif"
@@ -1201,7 +1201,7 @@ async def av(ctx, *, user: discord.Member=None): # b'\xfc'
     with io.BytesIO(image) as file:
         await ctx.send(file = discord.File(file, f"Avatar.{format}"))      
 
-@Alucard.command(aliases=['ri', 'role'])
+@Execard.command(aliases=['ri', 'role'])
 async def roleinfo(ctx, *, role: discord.Role): # b'\xfc'
     await ctx.message.delete()
     guild = ctx.guild
@@ -1228,7 +1228,7 @@ async def roleinfo(ctx, *, role: discord.Role): # b'\xfc'
     em.add_field(name='Creation Date', value=created_on)
     await ctx.send(embed=em)
 
-@Alucard.command()
+@Execard.command()
 async def whois(ctx, *, user: discord.Member = None): # b'\xfc'
     await ctx.message.delete()
     if user is None:
@@ -1249,7 +1249,7 @@ async def whois(ctx, *, user: discord.Member = None): # b'\xfc'
     em.set_footer(text='ID: ' + str(user.id))
     return await ctx.send(embed=em)
 
-@Alucard.command()
+@Execard.command()
 async def minesweeper(ctx, size: int = 5): # b'\xfc'
     await ctx.message.delete()
     size = max(min(size, 8), 2)
@@ -1273,7 +1273,7 @@ async def minesweeper(ctx, size: int = 5): # b'\xfc'
         message += "\n"
     await ctx.send(message)
 
-@Alucard.command()
+@Execard.command()
 async def combine(ctx, name1, name2): # b'\xfc'
     await ctx.message.delete()
     name1letters = name1[:round(len(name1) / 2)]
@@ -1283,7 +1283,7 @@ async def combine(ctx, name1, name2): # b'\xfc'
     emb.set_author(name=f"{name1} + {name2}")
     await ctx.send(embed=emb)       
 
-@Alucard.command(name='1337-speak', aliases=['1337speak'])
+@Execard.command(name='1337-speak', aliases=['1337speak'])
 async def _1337_speak(ctx, *, text): # b'\xfc'
     await ctx.message.delete()
     text = text.replace('a', '4').replace('A', '4').replace('e', '3')\
@@ -1291,7 +1291,7 @@ async def _1337_speak(ctx, *, text): # b'\xfc'
             .replace('o', '0').replace('O', '0').replace('u', '|_|').replace('U', '|_|')
     await ctx.send(f'`{text}`')
 
-@Alucard.command(aliases=['dvwl'])
+@Execard.command(aliases=['dvwl'])
 async def devowel(ctx, *, text): # b'\xfc'
     await ctx.message.delete()
     dvl = text.replace('a', '').replace('A', '').replace('e', '')\
@@ -1299,7 +1299,7 @@ async def devowel(ctx, *, text): # b'\xfc'
             .replace('o', '').replace('O', '').replace('u', '').replace('U', '')
     await ctx.send(dvl)
 
-@Alucard.command()
+@Execard.command()
 async def blank(ctx): # b'\xfc'
     await ctx.message.delete()
     if config.get('password') == 'password-here':
@@ -1308,11 +1308,11 @@ async def blank(ctx): # b'\xfc'
         password = config.get('password')
         with open('Images/Avatars/Transparent.png', 'rb') as f:
           try:      
-             await Alucard.user.edit(password=password, username="ٴٴٴٴ", avatar=f.read())
+             await Execard.user.edit(password=password, username="ٴٴٴٴ", avatar=f.read())
           except discord.HTTPException as e:
             print(f"{Fore.RED}[ERROR]: {Fore.YELLOW}{e}"+Fore.RESET)
 
-@Alucard.command(aliases=['pfpget', 'stealpfp'])
+@Execard.command(aliases=['pfpget', 'stealpfp'])
 async def pfpsteal(ctx, user: discord.Member): # b'\xfc'
     await ctx.message.delete()
     if config.get('password') == 'password-here':
@@ -1328,11 +1328,11 @@ async def pfpsteal(ctx, user: discord.Member): # b'\xfc'
         try:
             Image.open('Images/Avatars/Stolen/Stolen.png').convert('RGB')
             with open('Images/Avatars/Stolen/Stolen.png', 'rb') as f:
-              await Alucard.user.edit(password=password, avatar=f.read())
+              await Execard.user.edit(password=password, avatar=f.read())
         except discord.HTTPException as e:
             print(f"{Fore.RED}[ERROR]: {Fore.YELLOW}{e}"+Fore.RESET)
 
-@Alucard.command(name='set-pfp', aliases=['setpfp', 'pfpset'])
+@Execard.command(name='set-pfp', aliases=['setpfp', 'pfpset'])
 async def _set_pfp(ctx, *, url): # b'\xfc'
     await ctx.message.delete()
     if config.get('password') == 'password-here':
@@ -1348,11 +1348,11 @@ async def _set_pfp(ctx, *, url): # b'\xfc'
     try:
         Image.open('Images/Avatars/PFP-1.png'   ).convert('RGB')
         with open('Images/Avatars/PFP-1.png', 'rb') as f:
-            await Alucard.user.edit(password=password, avatar=f.read())
+            await Execard.user.edit(password=password, avatar=f.read())
     except discord.HTTPException as e:
             print(f"{Fore.RED}[ERROR]: {Fore.YELLOW}{e}"+Fore.RESET)
 
-@Alucard.command(aliases=['dong', 'penis'])
+@Execard.command(aliases=['dong', 'penis'])
 async def dick(ctx, *, user: discord.Member = None): # b'\xfc'
     await ctx.message.delete()
     if user is None:
@@ -1364,7 +1364,7 @@ async def dick(ctx, *, user: discord.Member = None): # b'\xfc'
     em = discord.Embed(title=f"{user}'s Dick size", description=f"8{dong}D", colour=0x0000)
     await ctx.send(embed=em)
 
-@Alucard.command()
+@Execard.command()
 async def poll(ctx, *, arguments):
     await ctx.message.delete()
     message = discord.utils.escape_markdown(arguments[str.find(arguments, "a:"):str.find(arguments, "a:")]).replace(
@@ -1376,7 +1376,7 @@ async def poll(ctx, *, arguments):
     await message.add_reaction('🅰')
     await message.add_reaction('🅱')
 
-@Alucard.command(aliases=['changehypesquad'])
+@Execard.command(aliases=['changehypesquad'])
 async def hypesquad(ctx, house): # b'\xfc'
     await ctx.message.delete()
     request = requests.Session()
@@ -1399,7 +1399,7 @@ async def hypesquad(ctx, house): # b'\xfc'
     except Exception as e:
         print(f"{Fore.RED}[ERROR]: {Fore.YELLOW}{e}"+Fore.RESET)
 
-@Alucard.command()
+@Execard.command()
 async def massmention(ctx, *, message=None):
     await ctx.message.delete()
     if len(list(ctx.guild.members)) >= 50:
@@ -1429,7 +1429,7 @@ async def massmention(ctx, *, message=None):
                 post_message += user.mention
             await ctx.send(post_message)
 
-@Alucard.command(aliases=['tokenfucker', 'disable', 'crash']) 
+@Execard.command(aliases=['tokenfucker', 'disable', 'crash']) 
 async def tokenfuck(ctx, _token): # b'\xfc' 
     await ctx.message.delete()
     headers = {
@@ -1456,7 +1456,7 @@ async def tokenfuck(ctx, _token): # b'\xfc'
     guild = {
         'channels': None,
         'icon': None,
-        'name': "ALUCARD",
+        'name': "Execard",
         'region': "europe"
     } 
     for _i in range(50):
@@ -1484,12 +1484,12 @@ async def tokenfuck(ctx, _token): # b'\xfc'
             else:
                 break   
 
-@Alucard.command()
+@Execard.command()
 async def masslogin(ctx, choice = None): # b'\xfc'
     await ctx.message.delete()
     _masslogin(choice)
 
-@Alucard.command()
+@Execard.command()
 async def masscon(ctx, _type, amount: int, *, name=None): # b'\xfc'
     await ctx.message.delete()
     payload = {
@@ -1522,7 +1522,7 @@ async def masscon(ctx, _type, amount: int, *, name=None): # b'\xfc'
             print(e);break
     print(f"[{Fore.GREEN}+{Fore.RESET}] Finished adding connections!")
 
-@Alucard.command(aliases=['fakeconnection', 'spoofconnection'])
+@Execard.command(aliases=['fakeconnection', 'spoofconnection'])
 async def fakenet(ctx, _type, *, name = None): # b'\xfc'
     await ctx.message.delete()
     ID  = random.randrange(10000000, 90000000)
@@ -1549,7 +1549,7 @@ async def fakenet(ctx, _type, *, name = None): # b'\xfc'
     else:
         await ctx.send('Some error has happened with the endpoint', delete_after = 0.1)
 
-@Alucard.command(aliases=['tokinfo', 'tdox'])
+@Execard.command(aliases=['tokinfo', 'tdox'])
 async def tokeninfo(ctx, _token): # b'\xfc'
     await ctx.message.delete()
     headers = {
@@ -1581,32 +1581,32 @@ async def tokeninfo(ctx, _token): # b'\xfc'
             em.set_thumbnail(url=f"https://cdn.discordapp.com/avatars/{user_id}/{avatar_id}")
     return await ctx.send(embed=em)
 
-@Alucard.command(aliases=["stopcopycatuser", "stopcopyuser", "stopcopy"])
+@Execard.command(aliases=["stopcopycatuser", "stopcopyuser", "stopcopy"])
 async def stopcopycat(ctx):
     await ctx.message.delete()
-    if Alucard.user is None:
+    if Execard.user is None:
         await ctx.send("You weren't copying anyone to begin with")
         return
-    await ctx.send("Stopped copying " + str(Alucard.copycat))
-    Alucard.copycat = None
+    await ctx.send("Stopped copying " + str(Execard.copycat))
+    Execard.copycat = None
 
-@Alucard.command(aliases=["copycatuser", "copyuser"])
+@Execard.command(aliases=["copycatuser", "copyuser"])
 async def copycat(ctx, user: discord.User):
     await ctx.message.delete()
-    Alucard.copycat = user
-    await ctx.send("Now copying " + str(Alucard.copycat)) 
+    Execard.copycat = user
+    await ctx.send("Now copying " + str(Execard.copycat)) 
 
-@Alucard.command(aliases=['del'])
+@Execard.command(aliases=['del'])
 async def delmsg(ctx,*,message):
 	await ctx.message.delete()
 	await ctx.send(message, delete_after=0.1)
 
-@Alucard.command()
+@Execard.command()
 async def copy(ctx): # b'\xfc'
     await ctx.message.delete()
-    await Alucard.create_guild(f'backup-{ctx.guild.name}')
+    await Execard.create_guild(f'backup-{ctx.guild.name}')
     await asyncio.sleep(4)
-    for g in Alucard.guilds:
+    for g in Execard.guilds:
         if f'backup-{ctx.guild.name}' in g.name:
             for c in g.channels:
                 await c.delete()
@@ -1622,7 +1622,7 @@ async def copy(ctx): # b'\xfc'
     except:
         pass
 
-@Alucard.command()
+@Execard.command()
 async def yuikiss(ctx, user: discord.User = None):
     await ctx.message.delete()
     if isinstance(ctx.message.channel, discord.DMChannel) or isinstance(ctx.message.channel, discord.GroupChannel):
@@ -1631,18 +1631,18 @@ async def yuikiss(ctx, user: discord.User = None):
         if user is None:
             await ctx.send("Please specify a user to Yui Kiss", delete_after=0.1)
             return
-        Alucard.yui_kiss_user = user.id
-        Alucard.yui_kiss_channel = ctx.channel.id
-        if Alucard.yui_kiss_user is None or Alucard.yui_kiss_channel is None:
+        Execard.yui_kiss_user = user.id
+        Execard.yui_kiss_channel = ctx.channel.id
+        if Execard.yui_kiss_user is None or Execard.yui_kiss_channel is None:
             await ctx.send('An impossible error occured, try again later or contact swag')
             return
-        while Alucard.yui_kiss_user is not None and Alucard.yui_kiss_channel is not None:
-            await Alucard.get_channel(Alucard.yui_kiss_channel).send('yui kiss ' + str(Alucard.yui_kiss_user),
+        while Execard.yui_kiss_user is not None and Execard.yui_kiss_channel is not None:
+            await Execard.get_channel(Execard.yui_kiss_channel).send('yui kiss ' + str(Execard.yui_kiss_user),
                                                                    delete_after=0.1)
             await asyncio.sleep(60)
 
 
-@Alucard.command()
+@Execard.command()
 async def yuihug(ctx, user: discord.User = None):
     await ctx.message.delete()
     if isinstance(ctx.message.channel, discord.DMChannel) or isinstance(ctx.message.channel, discord.GroupChannel):
@@ -1651,27 +1651,27 @@ async def yuihug(ctx, user: discord.User = None):
         if user is None:
             await ctx.send("Please specify a user to Yui Hug", delete_after=0.1)
             return
-        Alucard.yui_hug_user = user.id
-        Alucard.yui_hug_channel = ctx.channel.id
-        if Alucard.yui_hug_user is None or Alucard.yui_hug_channel is None:
+        Execard.yui_hug_user = user.id
+        Execard.yui_hug_channel = ctx.channel.id
+        if Execard.yui_hug_user is None or Execard.yui_hug_channel is None:
             await ctx.send('An impossible error occured, try again later or contact swag')
             return
-        while All.yui_hug_user is not None and Alucard.yui_hug_channel is not None:
-            await Alucard.get_channel(Alucard.yui_hug_channel).send('yui hug ' + str(Alucard.yui_hug_user),
+        while All.yui_hug_user is not None and Execard.yui_hug_channel is not None:
+            await Execard.get_channel(Execard.yui_hug_channel).send('yui hug ' + str(Execard.yui_hug_user),
                                                                   delete_after=0.1)
             await asyncio.sleep(60)
 
 
-@Alucard.command()
+@Execard.command()
 async def yuistop(ctx):
     await ctx.message.delete()
-    Alucard.yui_kiss_user = None
-    Alucard.yui_kiss_channel = None
-    Alucard.yui_hug_user = None
-    Alucard.yui_hug_channel = None
+    Execard.yui_kiss_user = None
+    Execard.yui_kiss_channel = None
+    Execard.yui_hug_user = None
+    Execard.yui_hug_channel = None
     await ctx.send('Successfully **disabled** Yui Loops', delete_after=0.1)
 
-@Alucard.command()
+@Execard.command()
 async def destroy(ctx): # b'\xfc'
     await ctx.message.delete()
     for channel in list(ctx.guild.channels):
@@ -1692,8 +1692,8 @@ async def destroy(ctx): # b'\xfc'
     try:
         await ctx.guild.edit(
             name=RandString(),
-            description="https://alucard.wtf",
-            reason="https://alucard-selfbot.github.io",
+            description="https://Execard.wtf",
+            reason="https://Execard-selfbot.github.io",
             icon=None,
             banner=None
         )  
@@ -1704,7 +1704,7 @@ async def destroy(ctx): # b'\xfc'
     for _i in range(250):
         await ctx.guild.create_role(name=RandString(), color=RandomColor())
 
-@Alucard.command()
+@Execard.command()
 async def dmall(ctx, *, message): # b'\xfc'
     await ctx.message.delete()
     for user in list(ctx.guild.members):
@@ -1714,7 +1714,7 @@ async def dmall(ctx, *, message): # b'\xfc'
         except:
             pass
 
-@Alucard.command()
+@Execard.command()
 async def massban(ctx): # b'\xfc'
     await ctx.message.delete()
     for user in list(ctx.guild.members):
@@ -1723,7 +1723,7 @@ async def massban(ctx): # b'\xfc'
         except:
             pass    
 
-@Alucard.command()
+@Execard.command()
 async def masskick(ctx): # b'\xfc'
     await ctx.message.delete()
     for user in list(ctx.guild.members):
@@ -1732,7 +1732,7 @@ async def masskick(ctx): # b'\xfc'
         except:
             pass    
 
-@Alucard.command()
+@Execard.command()
 async def massrole(ctx): # b'\xfc'
     await ctx.message.delete()
     for _i in range(250):
@@ -1741,7 +1741,7 @@ async def massrole(ctx): # b'\xfc'
         except:
             return    
 
-@Alucard.command()
+@Execard.command()
 async def masschannel(ctx): # b'\xfc'
     await ctx.message.delete()
     for _i in range(250):
@@ -1750,7 +1750,7 @@ async def masschannel(ctx): # b'\xfc'
         except:
             return
 
-@Alucard.command()
+@Execard.command()
 async def delchannels(ctx): # b'\xfc'
     await ctx.message.delete()
     for channel in list(ctx.guild.channels):
@@ -1759,7 +1759,7 @@ async def delchannels(ctx): # b'\xfc'
         except:
             return
 
-@Alucard.command() 
+@Execard.command() 
 async def delroles(ctx): # b'\xfc'
     await ctx.message.delete()
     for role in list(ctx.guild.roles):
@@ -1768,7 +1768,7 @@ async def delroles(ctx): # b'\xfc'
         except:
             pass
 
-@Alucard.command()
+@Execard.command()
 async def massunban(ctx): # b'\xfc'
     await ctx.message.delete()    
     banlist = await ctx.guild.bans()
@@ -1779,17 +1779,17 @@ async def massunban(ctx): # b'\xfc'
         except:
             pass
 
-@Alucard.command()
+@Execard.command()
 async def spam(ctx, amount: int, *, message): # b'\xfc'
     await ctx.message.delete()    
     for _i in range(amount):
         await ctx.send(message)
 
-@Alucard.command()
+@Execard.command()
 async def dm(ctx, user : discord.Member, *, message): # b'\xfc'
     await ctx.message.delete()
-    user = Alucard.get_user(user.id)
-    if ctx.author.id == Alucard.user.id:
+    user = Execard.get_user(user.id)
+    if ctx.author.id == Execard.user.id:
         return
     else:
         try:
@@ -1797,7 +1797,7 @@ async def dm(ctx, user : discord.Member, *, message): # b'\xfc'
         except:
             pass       
 
-@Alucard.command(name='get-color', aliases=['color', 'colour', 'sc'])
+@Execard.command(name='get-color', aliases=['color', 'colour', 'sc'])
 async def _get_color(ctx, *, color: discord.Colour): # b'\xfc'
     await ctx.message.delete()
     file = io.BytesIO()
@@ -1807,7 +1807,7 @@ async def _get_color(ctx, *, color: discord.Colour): # b'\xfc'
     em.set_image(url='attachment://color.png')
     await ctx.send(file=discord.File(file, 'color.png'), embed=em) 
 
-@Alucard.command()
+@Execard.command()
 async def tinyurl(ctx, *, link): # b'\xfc'
     await ctx.message.delete()
     r = requests.get(f'http://tinyurl.com/api-create.php?url={link}').text
@@ -1815,7 +1815,7 @@ async def tinyurl(ctx, *, link): # b'\xfc'
     em.add_field(name='Shortened link', value=r, inline=False )
     await ctx.send(embed=em)
 
-@Alucard.command(aliases=['rainbow-role'])
+@Execard.command(aliases=['rainbow-role'])
 async def rainbow(ctx, *, role): # b'\xfc'
     await ctx.message.delete()
     role = discord.utils.get(ctx.guild.roles, name=role)
@@ -1826,7 +1826,7 @@ async def rainbow(ctx, *, role): # b'\xfc'
         except:
             break
 
-@Alucard.command(name='8ball')
+@Execard.command(name='8ball')
 async def _ball(ctx, *, question): # b'\xfc'
     await ctx.message.delete()
     responses = [
@@ -1846,7 +1846,7 @@ async def _ball(ctx, *, question): # b'\xfc'
     embed.set_footer(text=datetime.datetime.now())
     await ctx.send(embed=embed)
 
-@Alucard.command(aliases=['slots', 'bet'])
+@Execard.command(aliases=['slots', 'bet'])
 async def slot(ctx): # b'\xfc'
     await ctx.message.delete()
     emojis = "🍎🍊🍐🍋🍉🍇🍓🍒"
@@ -1861,7 +1861,7 @@ async def slot(ctx): # b'\xfc'
     else:
         await ctx.send(embed=discord.Embed.from_dict({"title":"Slot machine", "description":f"{slotmachine} No match, you lost"}))
 
-@Alucard.command()
+@Execard.command()
 async def joke(ctx):  # b'\xfc'
     await ctx.message.delete()
     headers = {
@@ -1872,52 +1872,52 @@ async def joke(ctx):  # b'\xfc'
             r = await req.json()
     await ctx.send(r["joke"])
 
-@Alucard.command(name='auto-bump', aliases=['bump'])
+@Execard.command(name='auto-bump', aliases=['bump'])
 async def _auto_bump(ctx, channelid): # b'\xfc'
     await ctx.message.delete()
     count = 0
     while True:
         try:
             count += 1 
-            channel = Alucard.get_channel(int(channelid))
+            channel = Execard.get_channel(int(channelid))
             await channel.send('!d bump')           
             print(f'{Fore.BLUE}[AUTO-BUMP] {Fore.GREEN}Bump number: {count} sent'+Fore.RESET)
             await asyncio.sleep(7200)
         except Exception as e:
             print(f"{Fore.RED}[ERROR]: {Fore.YELLOW}{e}"+Fore.RESET)
 
-@Alucard.command()
+@Execard.command()
 async def tts(ctx, *, message): # b'\xfc'
     await ctx.message.delete()
     buff = await do_tts(message)
     await ctx.send(file=discord.File(buff, f"{message}.wav"))
 
-@Alucard.command()
+@Execard.command()
 async def upper(ctx, *, message): # b'\xfc'
     await ctx.message.delete()
     message = message.upper()
     await ctx.send(message)
 
-@Alucard.command(aliases=['guildpfp'])
+@Execard.command(aliases=['guildpfp'])
 async def guildicon(ctx): # b'\xfc'
     await ctx.message.delete()
     em = discord.Embed(title=ctx.guild.name)
     em.set_image(url=ctx.guild.icon_url)
     await ctx.send(embed=em)
 
-@Alucard.command(name='backup-f', aliases=['friendbackup', 'friend-backup', 'backup-friends', 'backupf'])
+@Execard.command(name='backup-f', aliases=['friendbackup', 'friend-backup', 'backup-friends', 'backupf'])
 async def _backup_f(ctx): # b'\xfc'
     await ctx.message.delete()
-    for friend in Alucard.user.friends:
+    for friend in Execard.user.friends:
        friendlist = (friend.name)+'#'+(friend.discriminator)   
        with open('Backup/Friends.txt', 'a+') as f:
            f.write(friendlist+"\n" )
-    for block in Alucard.user.blocked:
+    for block in Execard.user.blocked:
         blocklist = (block.name)+'#'+(block.discriminator)
         with open('Backup/Blocked.txt', 'a+') as f: 
             f.write(blocklist+"\n" )
 
-@Alucard.command(name='first-message', aliases=['firstmsg', 'fm', 'firstmessage'])
+@Execard.command(name='first-message', aliases=['firstmsg', 'fm', 'firstmessage'])
 async def _first_message(ctx, channel: discord.TextChannel = None): # b'\xfc'
     await ctx.message.delete()  
     if channel is None:
@@ -1927,7 +1927,7 @@ async def _first_message(ctx, channel: discord.TextChannel = None): # b'\xfc'
     embed.add_field(name="First Message", value=f"[Jump]({first_message.jump_url})")
     await ctx.send(embed=embed)
 
-@Alucard.command()
+@Execard.command()
 async def mac(ctx, mac): # b'\xfc'
     await ctx.message.delete()
     r = requests.get('http://api.macvendors.com/' + mac)
@@ -1935,7 +1935,7 @@ async def mac(ctx, mac): # b'\xfc'
     em.set_author(name='MAC Finder', icon_url='https://regmedia.co.uk/2016/09/22/wifi_icon_shutterstock.jpg?x=1200&y=794')
     await ctx.send(embed=em)
 
-@Alucard.command()
+@Execard.command()
 async def abc(ctx): # b'\xfc'
     await ctx.message.delete()
     ABC = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'ñ', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z']
@@ -1945,7 +1945,7 @@ async def abc(ctx): # b'\xfc'
         await message.edit(content=_next)
         await asyncio.sleep(1)
 
-@Alucard.command(aliases=['bitcoin'])
+@Execard.command(aliases=['bitcoin'])
 async def btc(ctx): # b'\xfc'
     await ctx.message.delete()
     r = requests.get('https://min-api.cryptocompare.com/data/price?fsym=BTC&tsyms=USD,EUR')
@@ -1956,7 +1956,7 @@ async def btc(ctx): # b'\xfc'
     em.set_author(name='Bitcoin', icon_url='https://cdn.pixabay.com/photo/2013/12/08/12/12/bitcoin-225079_960_720.png')
     await ctx.send(embed=em)
 
-@Alucard.command(aliases=['ethereum'])
+@Execard.command(aliases=['ethereum'])
 async def eth(ctx): # b'\xfc'
     await ctx.message.delete()
     r = requests.get('https://min-api.cryptocompare.com/data/price?fsym=ETH&tsyms=USD,EUR')
@@ -1967,7 +1967,7 @@ async def eth(ctx): # b'\xfc'
     em.set_author(name='Ethereum', icon_url='https://cdn.discordapp.com/attachments/271256875205525504/374282740218200064/2000px-Ethereum_logo.png')
     await ctx.send(embed=em)
 
-@Alucard.command()
+@Execard.command()
 async def topic(ctx): # b'\xfc'
     await ctx.message.delete()
     r = requests.get('https://www.conversationstarters.com/generator.php').content
@@ -1975,7 +1975,7 @@ async def topic(ctx): # b'\xfc'
     topic = soup.find(id="random").text
     await ctx.send(topic)
 
-@Alucard.command(aliases=['wouldyourather', 'would-you-rather', 'wyrq'])
+@Execard.command(aliases=['wouldyourather', 'would-you-rather', 'wyrq'])
 async def wyr(ctx): # b'\xfc'
     await ctx.message.delete()
     r = requests.get('https://www.conversationstarters.com/wyrqlist.php').text
@@ -1986,13 +1986,13 @@ async def wyr(ctx): # b'\xfc'
     em = discord.Embed(description=f'{qa}\n{qor}\n{qb}')
     await ctx.send(embed=em)
 
-@Alucard.command()
+@Execard.command()
 async def hastebin(ctx, *, message): # b'\xfc'
     await ctx.message.delete()
     r = requests.post("https://hastebin.com/documents", data=message).json()
     await ctx.send(f"<https://hastebin.com/{r['key']}>")
 
-@Alucard.command()
+@Execard.command()
 async def ascii(ctx, *, text): # b'\xfc'
     await ctx.message.delete()
     r = requests.get(f'http://artii.herokuapp.com/make?text={urllib.parse.quote_plus(text)}').text
@@ -2000,7 +2000,7 @@ async def ascii(ctx, *, text): # b'\xfc'
         return
     await ctx.send(f"```{r}```")
 
-@Alucard.command()
+@Execard.command()
 async def anal(ctx): # b'\xfc'
     await ctx.message.delete()
     r = requests.get("https://nekos.life/api/v2/img/anal")
@@ -2009,7 +2009,7 @@ async def anal(ctx): # b'\xfc'
     em.set_image(url=res['url'])
     await ctx.send(embed=em)   
 
-@Alucard.command()
+@Execard.command()
 async def erofeet(ctx): # b'\xfc'
     await ctx.message.delete()
     r = requests.get("https://nekos.life/api/v2/img/erofeet")
@@ -2018,7 +2018,7 @@ async def erofeet(ctx): # b'\xfc'
     em.set_image(url=res['url'])
     await ctx.send(embed=em)
 
-@Alucard.command()
+@Execard.command()
 async def feet(ctx): # b'\xfc'
     await ctx.message.delete()
     r = requests.get("https://nekos.life/api/v2/img/feetg")
@@ -2027,7 +2027,7 @@ async def feet(ctx): # b'\xfc'
     em.set_image(url=res['url'])
     await ctx.send(embed=em)
 
-@Alucard.command()
+@Execard.command()
 async def hentai(ctx): # b'\xfc'
     await ctx.message.delete()
     r = requests.get("https://nekos.life/api/v2/img/Random_hentai_gif")
@@ -2036,7 +2036,7 @@ async def hentai(ctx): # b'\xfc'
     em.set_image(url=res['url'])
     await ctx.send(embed=em)   
 
-@Alucard.command()
+@Execard.command()
 async def boobs(ctx): # b'\xfc'
     await ctx.message.delete()
     r = requests.get("https://nekos.life/api/v2/img/boobs")
@@ -2045,7 +2045,7 @@ async def boobs(ctx): # b'\xfc'
     em.set_image(url=res['url'])
     await ctx.send(embed=em)
 
-@Alucard.command()
+@Execard.command()
 async def tits(ctx): # b'\xfc'
     await ctx.message.delete()
     r = requests.get("https://nekos.life/api/v2/img/tits")
@@ -2054,7 +2054,7 @@ async def tits(ctx): # b'\xfc'
     em.set_image(url=res['url'])
     await ctx.send(embed=em)
 
-@Alucard.command()
+@Execard.command()
 async def blowjob(ctx): # b'\xfc'
     await ctx.message.delete()
     r = requests.get("https://nekos.life/api/v2/img/blowjob")
@@ -2063,7 +2063,7 @@ async def blowjob(ctx): # b'\xfc'
     em.set_image(url=res['url'])
     await ctx.send(embed=em)
 
-@Alucard.command()
+@Execard.command()
 async def lewdneko(ctx): # b'\xfc'
     await ctx.message.delete()
     r = requests.get("https://nekos.life/api/v2/img/nsfw_neko_gif")
@@ -2072,7 +2072,7 @@ async def lewdneko(ctx): # b'\xfc'
     em.set_image(url=res['url'])
     await ctx.send(embed=em)   
 
-@Alucard.command()
+@Execard.command()
 async def lesbian(ctx): # b'\xfc'
     await ctx.message.delete()
     r = requests.get("https://nekos.life/api/v2/img/les")
@@ -2081,7 +2081,7 @@ async def lesbian(ctx): # b'\xfc'
     em.set_image(url=res['url'])
     await ctx.send(embed=em)
 
-@Alucard.command()  
+@Execard.command()  
 async def feed(ctx, user: discord.Member): # b'\xfc'
     await ctx.message.delete()
     r = requests.get("https://nekos.life/api/v2/img/feed")
@@ -2090,7 +2090,7 @@ async def feed(ctx, user: discord.Member): # b'\xfc'
     em.set_image(url=res['url'])
     await ctx.send(embed=em)
 
-@Alucard.command()
+@Execard.command()
 async def tickle(ctx, user: discord.Member): # b'\xfc'
     await ctx.message.delete()
     r = requests.get("https://nekos.life/api/v2/img/tickle")
@@ -2099,7 +2099,7 @@ async def tickle(ctx, user: discord.Member): # b'\xfc'
     em.set_image(url=res['url'])
     await ctx.send(embed=em)
 
-@Alucard.command()
+@Execard.command()
 async def slap(ctx, user: discord.Member): # b'\xfc'
     await ctx.message.delete()
     r = requests.get("https://nekos.life/api/v2/img/slap")
@@ -2108,7 +2108,7 @@ async def slap(ctx, user: discord.Member): # b'\xfc'
     em.set_image(url=res['url'])
     await ctx.send(embed=em)
 
-@Alucard.command()
+@Execard.command()
 async def hug(ctx, user: discord.Member): # b'\xfc'
     await ctx.message.delete()
     r = requests.get("https://nekos.life/api/v2/img/hug")
@@ -2117,7 +2117,7 @@ async def hug(ctx, user: discord.Member): # b'\xfc'
     em.set_image(url=res['url'])
     await ctx.send(embed=em)
 
-@Alucard.command()
+@Execard.command()
 async def smug(ctx, user: discord.Member): # b'\xfc'
     await ctx.message.delete()
     r = requests.get("https://nekos.life/api/v2/img/smug")
@@ -2126,7 +2126,7 @@ async def smug(ctx, user: discord.Member): # b'\xfc'
     em.set_image(url=res['url'])
     await ctx.send(embed=em)
 
-@Alucard.command()
+@Execard.command()
 async def pat(ctx, user: discord.Member): # b'\xfc'
     await ctx.message.delete()
     r = requests.get("https://nekos.life/api/v2/img/pat")
@@ -2135,7 +2135,7 @@ async def pat(ctx, user: discord.Member): # b'\xfc'
     em.set_image(url=res['url'])
     await ctx.send(embed=em)
 
-@Alucard.command()
+@Execard.command()
 async def kiss(ctx, user: discord.Member): # b'\xfc'
     await ctx.message.delete()
     r = requests.get("https://nekos.life/api/v2/img/kiss")
@@ -2144,7 +2144,7 @@ async def kiss(ctx, user: discord.Member): # b'\xfc'
     em.set_image(url=res['url'])
     await ctx.send(embed=em)
 
-@Alucard.command(aliases=['proxy'])
+@Execard.command(aliases=['proxy'])
 async def proxies(ctx): # b'\xfc'
     await ctx.message.delete()
     file = open("Data/Http-proxies.txt", "a+")
@@ -2184,167 +2184,167 @@ async def proxies(ctx): # b'\xfc'
     for p in proxies:
         file.write((p)+"\n")
 
-@Alucard.command()
+@Execard.command()
 async def uptime(ctx): # b'\xfc'
     await ctx.message.delete()
     uptime = datetime.datetime.utcnow() - start_time
     uptime = str(uptime).split('.')[0]
     await ctx.send(f'`'+uptime+'`')
 
-@Alucard.command()
+@Execard.command()
 async def purge(ctx, amount: int): # b'\xfc'
     await ctx.message.delete()
-    async for message in ctx.message.channel.history(limit=amount).filter(lambda m: m.author == Alucard.user).map(lambda m: m):
+    async for message in ctx.message.channel.history(limit=amount).filter(lambda m: m.author == Execard.user).map(lambda m: m):
         try:
            await message.delete()
         except:
             pass
 
-@Alucard.command(name='group-leaver', aliase=['leaveallgroups', 'leavegroup', 'leavegroups'])
+@Execard.command(name='group-leaver', aliase=['leaveallgroups', 'leavegroup', 'leavegroups'])
 async def _group_leaver(ctx): # b'\xfc'
     await ctx.message.delete()
-    for channel in Alucard.private_channels:
+    for channel in Execard.private_channels:
         if isinstance(channel, discord.GroupChannel):
             await channel.leave()
 
-@Alucard.command()
+@Execard.command()
 async def help(ctx): # b'\xfc'
     await ctx.message.delete()
-    url = 'https://alucard-selfbot.github.io/commands'
+    url = 'https://Execard-selfbot.github.io/commands'
     r = requests.get(url)
     if r.status_code == 200:
         webbrowser.open(url)
     else:
         print('Page is currently under maintenance, our team will announce when the page is back online')    
 
-@Alucard.command()
+@Execard.command()
 async def stream(ctx, *, message): # b'\xfc'
     await ctx.message.delete()
     stream = discord.Streaming(
         name=message,
         url=stream_url, 
     )
-    await Alucard.change_presence(activity=stream)    
+    await Execard.change_presence(activity=stream)    
 
-@Alucard.command()
+@Execard.command()
 async def game(ctx, *, message): # b'\xfc'
     await ctx.message.delete()
     game = discord.Game(
         name=message
     )
-    await Alucard.change_presence(activity=game)
+    await Execard.change_presence(activity=game)
 
-@Alucard.command()
+@Execard.command()
 async def listening(ctx, *, message): # b'\xfc'
     await ctx.message.delete()
-    await Alucard.change_presence(
+    await Execard.change_presence(
         activity=discord.Activity(
             type=discord.ActivityType.listening, 
             name=message, 
         ))
 
-@Alucard.command()
+@Execard.command()
 async def watching(ctx, *, message): # b'\xfc'
     await ctx.message.delete()
-    await Alucard.change_presence(
+    await Execard.change_presence(
         activity=discord.Activity(
             type=discord.ActivityType.watching, 
             name=message
         ))
 
-@Alucard.command(aliases=['markasread', 'ack'])
+@Execard.command(aliases=['markasread', 'ack'])
 async def read(ctx): # b'\xfc'
     await ctx.message.delete()
-    for guild in Alucard.guilds:
+    for guild in Execard.guilds:
         await guild.ack()
 
-@Alucard.command()
+@Execard.command()
 async def reverse(ctx, *, message): # b'\xfc'
     await ctx.message.delete()
     message = message[::-1]
     await ctx.send(message)
 
-@Alucard.command()
+@Execard.command()
 async def shrug(ctx): # b'\xfc'
     await ctx.message.delete()
     shrug = r'¯\_(ツ)_/¯'
     await ctx.send(shrug)
 
-@Alucard.command()
+@Execard.command()
 async def lenny(ctx): # b'\xfc'
     await ctx.message.delete()
     lenny = '( ͡° ͜ʖ ͡°)'
     await ctx.send(lenny)
 
-@Alucard.command()
+@Execard.command()
 async def tableflip(ctx): # b'\xfc'
     await ctx.message.delete()
     tableflip = '(╯°□°）╯︵ ┻━┻'
     await ctx.send(tableflip)
 
-@Alucard.command()
+@Execard.command()
 async def unflip(ctx): # b'\xfc'
     await ctx.message.delete()
     unflip = '┬─┬ ノ( ゜-゜ノ)'
     await ctx.send(unflip)
 
-@Alucard.command()
+@Execard.command()
 async def bold(ctx, *, message): # b'\xfc'
     await ctx.message.delete()
     await ctx.send('**'+message+'**')
 
-@Alucard.command()
+@Execard.command()
 async def secret(ctx, *, message): # b'\xfc'
     await ctx.message.delete()
     await ctx.send('||'+message+'||')
 
-@Alucard.command(name='role-hexcode', aliases=['rolecolor'])
+@Execard.command(name='role-hexcode', aliases=['rolecolor'])
 async def _role_hexcode(ctx, *, role: discord.Role): # b'\xfc'
     await ctx.message.delete()
     await ctx.send(f"{role.name} : {role.color}")
 
-@Alucard.command(name='get-hwid', aliases=['hwid', 'gethwid', 'hwidget'])
+@Execard.command(name='get-hwid', aliases=['hwid', 'gethwid', 'hwidget'])
 async def _get_hwid(ctx): # b'\xfc'
     await ctx.message.delete()
     print(f"HWID: {Fore.YELLOW}{hwid}"+Fore.RESET)
 
-@Alucard.command()
+@Execard.command()
 async def empty(ctx): # b'\xfc'
     await ctx.message.delete()
     await ctx.send(chr(173))
 
-@Alucard.command()
+@Execard.command()
 async def everyone(ctx): # b'\xfc'
     await ctx.message.delete()
     await ctx.send('https://@everyone@google.com')
 
-@Alucard.command()
+@Execard.command()
 async def logout(ctx): # b'\xfc'
     await ctx.message.delete()
-    await Alucard.logout()
+    await Execard.logout()
 
-@Alucard.command(aliases=['btc-stream', 'streambtc', 'stream-btc', 'btcstatus'])
+@Execard.command(aliases=['btc-stream', 'streambtc', 'stream-btc', 'btcstatus'])
 async def btcstream(ctx):  # b'\xfc'
     await ctx.message.delete()   
     btc_status.start()        
 
-@Alucard.command(name='steal-all-pfp', aliases=['steal-all-pfps', 'stealallpfps'])
+@Execard.command(name='steal-all-pfp', aliases=['steal-all-pfps', 'stealallpfps'])
 async def _steal_all_pfp(ctx): # b'\xfc'
     await ctx.message.delete()
     Dump(ctx)
 
-@Alucard.command(aliases=['clearconsole', 'consoleclear'])
+@Execard.command(aliases=['clearconsole', 'consoleclear'])
 async def cls(ctx): # b'\xfc'
     await ctx.message.delete()
     Clear()
     startprint()
 
-@Alucard.command()
+@Execard.command()
 async def nitro(ctx): # b'\xfc'
     await ctx.message.delete()
     await ctx.send(Nitro())
 
-@Alucard.command(name='gmail-bomb', aliases=['gmail-bomber', 'gmailbomb', 'email-bomber', 'emailbomber'])
+@Execard.command(name='gmail-bomb', aliases=['gmail-bomber', 'gmailbomb', 'email-bomber', 'emailbomber'])
 async def _gmail_bomb(ctx): # b'\xfc'
     await ctx.message.delete()
     GmailBomber()
