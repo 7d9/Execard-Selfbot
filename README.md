@@ -31,6 +31,6 @@
 Credits to Syz#6631 and coats.#4321 for helping make this.
 also Thanks to Alucard, Exeter, PH-SB, Lucifer, and TNO selfbots for giving me the Idea to put them together to make a great Selfbot.
 
-## WARN
+## WARNING
 
 Selfbots are against TOS, use at your own risk.
