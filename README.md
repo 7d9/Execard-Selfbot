@@ -1,4 +1,4 @@
-# EXECARD SELFBOT:
+# EXECARD SELFBOT ~
 
 # Setup
 - Install [Python](https://www.python.org/downloads/release/python-390) with `Add Python to PATH` box
@@ -25,11 +25,6 @@
 - A: Alucard uses some windows features from modules. Example windll from ctypes. windll is used to add the console title. You can remove the title setters in-order to fix it.
 - Q: **`TypeError: __new__() got an unexpected keyword argument 'deny_new'`**
 - A: This error occured on an old installation of discord.py to fix simply run :`pip install -U discord.py` this updates discord.py!
-
-# Credits
-
-Credits to Syz#6631 and coats.#4321 for helping make this.
-also Thanks to Alucard, Exeter, PH-SB, Lucifer, and TNO selfbots for giving me the Idea to put them together to make a great Selfbot.
 
 ## WARNING
 
