@@ -13,9 +13,6 @@
 
 - Run selfbot with `launcher.bat`
 
-[![Run on Repl.it](https://repl.it/badge/github/Jeancys/Execard-Selfbot)](https://repl.it/github.com/Jeancys/Execard-Selfbot)
-
-
 # Q&A
 - Q: **`SSL Certificate Error`**
 - A: Just install [CRT File](https://crt.sh/?id=2835394). Then run it and install. (This is common and it was a certificate that expired May 30th 2020. But a new one came out so install it.). If you wanna go into further detail then head to [SITE](https://support.sectigo.com/Com_KnowledgeDetailPage?Id=kA03l00000117LT).  
