@@ -1,5 +1,7 @@
 # EXECARD SELFBOT ~
 
+**No Longer Maintained**
+
 # Setup
 - Install [Python](https://www.python.org/downloads/release/python-390) with `Add Python to PATH` box
 
