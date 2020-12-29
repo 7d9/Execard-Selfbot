@@ -1,6 +1,5 @@
 class SELFBOT():
-    __linecount__ = 2354
-    __version__ = 3.7
+    __version__ = 2.3
      
 import discord, subprocess, sys, time, os, colorama, base64, codecs, datetime, io, random, numpy, datetime, smtplib, string, ctypes
 import urllib.parse, urllib.request, re, json, requests, webbrowser, aiohttp, dns.name, asyncio, functools, logging
