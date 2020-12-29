@@ -23,6 +23,4 @@
 - Q: **`TypeError: __new__() got an unexpected keyword argument 'deny_new'`**
 - A: This error occured on an old installation of discord.py to fix simply run :`pip install -U discord.py` this updates discord.py!
 
-## WARNING
 
-Selfbots are against TOS, use at your own risk.
