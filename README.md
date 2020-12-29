@@ -1,11 +1,9 @@
 # EXECARD SELFBOT ~
 
-### **No Longer Maintained**
-
 # Setup
 - Install [Python](https://www.python.org/downloads/release/python-390) with `Add Python to PATH` box
 
-- Download [Source](https://github.com/Jeancys/Execard-Selfbot/archive/main.zip) and extract
+- Download [Source](https://github.com/Ecyss/Execard-Selfbot/archive/main.zip) and extract
 
 - Install modules with `installer.bat`
 
